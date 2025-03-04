@@ -1,0 +1,35 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@keyframes pulse-glow {
+  0% {
+    box-shadow: 0 0 5px rgba(39, 230, 39, 0);
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(39, 230, 39, 0.3);
+  }
+  100% {
+    box-shadow: 0 0 5px rgba(39, 230, 39, 0);
+  }
+}
+
+.animate-glow {
+  animation: pulse-glow 3s infinite;
+}
+
+.animate-glow-subtle {
+  animation: pulse-glow 4s infinite;
+}
+
+.dark .animate-glow {
+  animation-name: pulse-glow;
+  animation-duration: 3s;
+  animation-iteration-count: infinite;
+}
+
+.dark .animate-glow-subtle {
+  animation-name: pulse-glow;
+  animation-duration: 4s;
+  animation-iteration-count: infinite;
+}
