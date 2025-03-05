@@ -47,7 +47,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ story }) => {
   const domain = story.url ? new URL(story.url).hostname.replace(/^www\./, '') : null;
   
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 max-w-full overflow-hidden">
       <div className="bg-white dark:bg-slate-800 rounded-lg shadow-md border border-slate-200 dark:border-slate-700 p-6 transition-all duration-300 hover:shadow-[0_0_20px_rgba(39,230,39,0.2)] dark:hover:shadow-[0_0_20px_rgba(39,230,39,0.25)]">
         <h1 className="text-2xl font-bold text-slate-900 dark:text-white mb-2">{story.title}</h1>
         
@@ -101,7 +101,7 @@ const CommentSection: React.FC<CommentSectionProps> = ({ story }) => {
         ) : comments.length === 0 ? (
           <p className="text-slate-600 dark:text-slate-400">No comments yet.</p>
         ) : (
-          <div className="space-y-6">
+          <div className="space-y-6 w-full">
             {comments.map(comment => (
               <CommentItem key={comment.id} comment={comment} level={0} />
             ))}

@@ -58,17 +58,25 @@ export default {
       typography: (theme) => ({
         DEFAULT: {
           css: {
-            fontSize: '1.125rem',
-            lineHeight: '1.75',
+            maxWidth: 'none',
+            color: theme('colors.slate.700'),
+            fontSize: '0.925rem',
+            lineHeight: '1.6',
             p: {
-              marginTop: '1.25em',
-              marginBottom: '1.25em',
+              marginTop: '0.75em',
+              marginBottom: '0.75em',
             },
             a: {
               color: theme('colors.neon.600'),
+              overflowWrap: 'break-word',
+              wordBreak: 'break-word',
               '&:hover': {
                 color: theme('colors.neon.800'),
               },
+            },
+            pre: {
+              overflowX: 'auto',
+              fontSize: '0.875em',
             },
             code: {
               color: theme('colors.neon.700'),
@@ -76,11 +84,47 @@ export default {
               padding: '0.2em 0.4em',
               borderRadius: '0.25rem',
               fontSize: '0.875em',
+              wordBreak: 'break-word',
             },
+            'pre code': {
+              color: 'inherit',
+              fontSize: 'inherit',
+              fontFamily: 'inherit',
+              padding: '0',
+            },
+            img: {
+              maxWidth: '100%',
+              height: 'auto',
+            },
+            'blockquote p:first-of-type::before': {
+              content: 'none',
+            },
+            'blockquote p:last-of-type::after': {
+              content: 'none',
+            },
+          },
+        },
+        sm: {
+          css: {
+            fontSize: '0.875rem',
+            lineHeight: '1.5',
+          },
+        },
+        base: {
+          css: {
+            fontSize: '0.925rem',
+            lineHeight: '1.6',
+          },
+        },
+        lg: {
+          css: {
+            fontSize: '1.025rem',
+            lineHeight: '1.75',
           },
         },
         invert: {
           css: {
+            color: theme('colors.slate.300'),
             a: {
               color: theme('colors.neon.400'),
               '&:hover': {
