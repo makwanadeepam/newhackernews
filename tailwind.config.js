@@ -58,6 +58,12 @@ export default {
       typography: (theme) => ({
         DEFAULT: {
           css: {
+            fontSize: '1.125rem',
+            lineHeight: '1.75',
+            p: {
+              marginTop: '1.25em',
+              marginBottom: '1.25em',
+            },
             a: {
               color: theme('colors.neon.600'),
               '&:hover': {
@@ -69,6 +75,7 @@ export default {
               backgroundColor: theme('colors.neon.50'),
               padding: '0.2em 0.4em',
               borderRadius: '0.25rem',
+              fontSize: '0.875em',
             },
           },
         },

@@ -12,7 +12,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, level }) => {
   const [replies, setReplies] = useState<Comment[]>([]);
   const [loading, setLoading] = useState(false);
   const [expanded, setExpanded] = useState(true);
-  const [showReplies, setShowReplies] = useState(level < 2); // Auto-expand first two levels
+  const [showReplies, setShowReplies] = useState(level < 2);
   
   useEffect(() => {
     const fetchReplies = async () => {
@@ -51,7 +51,6 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, level }) => {
     setShowReplies(!showReplies);
   };
   
-  // Create indentation based on nesting level
   const indentStyle = {
     marginLeft: level > 0 ? `${Math.min(level * 16, 64)}px` : '0',
     borderLeft: level > 0 ? '2px solid' : 'none',
@@ -59,10 +58,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, level }) => {
     paddingLeft: level > 0 ? '16px' : '0',
   };
   
-  // For dark mode, we'll handle the border color with a class
   const indentClass = level > 0 ? (level % 2 === 0 ? 'dark:border-slate-700' : 'dark:border-neon-700/30') : '';
-  
-  // Determine glow class based on level
   const glowClass = level % 2 === 0 
     ? 'hover:shadow-[0_0_15px_rgba(39,230,39,0.15)] dark:hover:shadow-[0_0_15px_rgba(39,230,39,0.2)]' 
     : 'hover:shadow-[0_0_20px_rgba(39,230,39,0.25)] dark:hover:shadow-[0_0_20px_rgba(39,230,39,0.3)]';
@@ -75,44 +71,44 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, level }) => {
     <div className={`${indentClass} transition-all duration-200`} style={indentStyle}>
       <div 
         className={`${level % 2 === 0 ? 'bg-slate-50 dark:bg-slate-800/50' : 'bg-neon-50/30 dark:bg-slate-800/80'} 
-          rounded-lg p-4 border ${level % 2 === 0 ? 'border-slate-100 dark:border-slate-700/50' : 'border-neon-100 dark:border-neon-900/20'} 
+          rounded-lg p-4 sm:p-5 border ${level % 2 === 0 ? 'border-slate-100 dark:border-slate-700/50' : 'border-neon-100 dark:border-neon-900/20'} 
           transition-all duration-300 ${glowClass}`}
       >
-        <div className="flex justify-between items-start mb-2">
-          <div className="flex items-center space-x-3 text-sm text-slate-600 dark:text-slate-400">
+        <div className="flex justify-between items-start mb-3">
+          <div className="flex items-center gap-4 text-sm sm:text-base text-slate-600 dark:text-slate-400">
             <span className="flex items-center font-medium text-slate-700 dark:text-slate-300">
-              <User className="h-3 w-3 mr-1" />
+              <User className="h-4 w-4 mr-1.5" />
               {comment.by}
             </span>
             
             <span className="flex items-center">
-              <Clock className="h-3 w-3 mr-1" />
+              <Clock className="h-4 w-4 mr-1.5" />
               {formatTimeAgo(comment.time)}
             </span>
           </div>
           
           <button 
             onClick={toggleExpanded}
-            className="text-slate-500 dark:text-slate-400 hover:text-neon-600 dark:hover:text-neon-400 transition-colors duration-200"
+            className="text-slate-500 dark:text-slate-400 hover:text-neon-600 dark:hover:text-neon-400 transition-colors duration-200 p-1"
           >
-            {expanded ? <ChevronUp className="h-4 w-4" /> : <ChevronDown className="h-4 w-4" />}
+            {expanded ? <ChevronUp className="h-5 w-5" /> : <ChevronDown className="h-5 w-5" />}
           </button>
         </div>
         
         {expanded && (
           <div 
-            className="prose prose-slate dark:prose-invert prose-sm max-w-none"
+            className="prose prose-slate dark:prose-invert prose-base sm:prose-lg max-w-none"
             dangerouslySetInnerHTML={{ __html: comment.text || '' }}
           />
         )}
         
         {comment.kids && comment.kids.length > 0 && expanded && (
-          <div className="mt-3">
+          <div className="mt-4">
             <button
               onClick={toggleReplies}
-              className="text-xs flex items-center text-neon-600 dark:text-neon-400 hover:text-neon-800 dark:hover:text-neon-300 transition-colors duration-200"
+              className="text-sm sm:text-base flex items-center text-neon-600 dark:text-neon-400 hover:text-neon-800 dark:hover:text-neon-300 transition-colors duration-200"
             >
-              <MessageSquare className="h-3 w-3 mr-1" />
+              <MessageSquare className="h-4 w-4 mr-1.5" />
               {showReplies ? 'Hide' : 'Show'} {comment.kids.length} {comment.kids.length === 1 ? 'reply' : 'replies'}
             </button>
             
@@ -120,7 +116,7 @@ const CommentItem: React.FC<CommentItemProps> = ({ comment, level }) => {
               <div className="mt-4 space-y-4">
                 {loading ? (
                   <div className="flex justify-center items-center h-8 ml-4">
-                    <div className="animate-spin rounded-full h-4 w-4 border-t-2 border-b-2 border-neon-500"></div>
+                    <div className="animate-spin rounded-full h-5 w-5 border-t-2 border-b-2 border-neon-500"></div>
                   </div>
                 ) : (
                   replies.map(reply => (
